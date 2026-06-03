@@ -52,7 +52,7 @@
       --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 
     body {
       font-family: var(--font-body);
@@ -122,9 +122,9 @@
     .text-center { text-align: center; }
     .text-center .section-subtitle { margin: 14px auto 0; }
 
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
-    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 32px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 28px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 24px; }
 
     /* ===== BUTTONS ===== */
     .btn {
@@ -706,7 +706,7 @@
 
     .plans-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
       gap: 32px;
       margin-top: 60px;
       align-items: stretch;
@@ -846,7 +846,7 @@
 
     .transforms-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
       gap: 28px;
       margin-top: 60px;
     }
@@ -940,7 +940,7 @@
 
     .testimonials-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
       gap: 28px;
       margin-top: 60px;
     }
@@ -1932,13 +1932,18 @@
     @media (max-width: 480px) {
       .hero-title { font-size: 2.5rem; }
       .section-title { font-size: 1.8rem; }
+      .section { padding: 60px 0; }
+      .section-sm { padding: 44px 0; }
       .hero-buttons { flex-direction: column; }
-      .btn { width: 100%; }
+      .hero-buttons .btn { width: 100%; }
       .closing-buttons .btn { width: 100%; }
       .gallery-grid { grid-template-columns: 1fr; }
       .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-column: span 1; }
       .steps-container { grid-template-columns: 1fr; }
-      .contact-form { padding: 28px; }
+      .contact-form { padding: 24px; }
+      .contact-form h3 { font-size: 1.2rem; margin-bottom: 20px; }
+      .about-badge { bottom: 16px; right: 16px; padding: 16px 20px; }
+      .about-badge .value { font-size: 2rem; }
       .floating-wa, .floating-chat { bottom: 20px; right: 20px; width: 56px; height: 56px; font-size: 1.4rem; }
       .floating-chat { bottom: 85px; }
     }
@@ -2268,6 +2273,64 @@
     @media (max-width: 480px) {
       .about-photo-main { width: 78%; height: 84%; }
       .about-photo-sub { width: 58%; height: 52%; }
+    }
+
+    /* ===== EXTRA MOBILE FIXES ===== */
+
+    /* Splash: texto legible en pantallas pequeñas */
+    @media (max-width: 480px) {
+      .splash-text {
+        font-size: clamp(1.6rem, 6vw, 2rem);
+        letter-spacing: 0.06em;
+        animation: none;
+        text-shadow:
+          0 0 14px rgba(168,230,30,0.95),
+          0 0 40px rgba(168,230,30,0.45);
+      }
+      .splash-icons { font-size: 1.5rem; gap: 16px; }
+      .splash-icons .ico-fire { font-size: 1.8rem; }
+      .splash-bar-wrap { width: min(260px, 80vw); }
+    }
+
+    /* Hero foto: más compacta en pantallas muy pequeñas */
+    @media (max-width: 400px) {
+      .hero-photo { min-height: 270px !important; }
+      .hero-photo-cutout { max-height: 270px !important; }
+    }
+
+    /* About fotos: contenedor con overflow limpio */
+    .about-image-container { overflow: visible; }
+    @media (max-width: 480px) {
+      .about-photos { min-height: 320px; }
+    }
+
+    /* Nav container: evitar doble padding en móvil */
+    @media (max-width: 768px) {
+      #navbar { padding: 0 16px; }
+      .nav-container { padding: 0 8px; }
+    }
+
+    /* Stats hero: spacing mejor en móvil */
+    @media (max-width: 480px) {
+      .hero-stats { gap: 20px; padding-top: 28px; }
+      .hero-stats .stat-value { font-size: 2.2rem; }
+      .stat-label { font-size: 0.72rem; }
+    }
+
+    /* Footer: logo más pequeño en móvil */
+    @media (max-width: 480px) {
+      .footer-logo .brand-logo { height: 64px; }
+    }
+
+    /* Tipografía hero: ajuste fino en móvil */
+    @media (max-width: 480px) {
+      .hero-subtitle { font-size: 1rem; margin-bottom: 28px; }
+      .hero-tag { font-size: 0.72rem; padding: 8px 14px; }
+    }
+
+    /* Planes: una columna en móvil */
+    @media (max-width: 640px) {
+      .plans-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
